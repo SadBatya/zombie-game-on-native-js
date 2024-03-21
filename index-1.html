@@ -31,8 +31,7 @@
         align-items: center;
         padding: 20px;
         color: white;
-
-        border: 2px solid white;
+        border: 2px solid rgba(255, 255, 255, 0.464);
         /* Рамка для отображения границ элементов */
       }
 
@@ -51,14 +50,10 @@
 
       .item {
         box-sizing: border-box;
-        /* Учитывать padding и border в расчетах ширины */
-
         width: 120px;
         height: 120px;
         margin: 10px 20px;
         border-radius: 50%;
-        border: 2px solid white;
-        /* Рамка для отображения границ элементов */
       }
 
       img {
@@ -114,22 +109,24 @@
       let randomIndex;
       const zombieImg = document.createElement('img');
       zombieImg.src = './images/zombie.png';
+
       const items = document.querySelectorAll('.item');
       const bu = document.querySelector('#sound-bu');
       const soundBtn = document.querySelector('#sound-btn');
+
       const hitImg = document.createElement('img');
       hitImg.src = './images/blood.png';
-
+      
+      let hit = true;
       const hitCounter = document.querySelector('#hit-counter');
       const shot = document.querySelector('#sound-shot');
 
       //создаем счетчик для подсчета промахов
-      let hit = true;
       const missCounter = document.querySelector('#miss-counter');
-       
+
       // при клике на зомби заменяем картинку на другую иконку
       zombieImg.onclick = function () {
-        hit = true
+        hit = true;
         hitCounter.innerText++;
         bu.currentTime = 0;
         shot.play();
@@ -156,18 +153,19 @@
 
       randomIndex = getRandomItemIndex(items);
       items[randomIndex].append(zombieImg);
+
       // задаем интервал появления зомби
       setInterval(function () {
-
-        if(hit === true){
-            hit = false
-        }else{
-            missCounter.innerText++
+        if (hit === true) {
+          hit = false;
+        } else {
+          missCounter.innerText++;
         }
-        hitImg.remove()
+        hitImg.remove();
         randomIndex = getRandomItemIndex(items);
         items[randomIndex].append(zombieImg);
       }, 2000);
+
     </script>
   </body>
 </html>
