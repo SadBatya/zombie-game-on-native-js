@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zombie</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            background-color: rgba(53, 2, 2, 0.981);
+            padding: 30px;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        button {
+            width: 135px;
+            padding: 10px 25px;
+            background-color: rgba(53, 2, 2, 0.981);
+            border: 2px solid white;
+            border-radius: 5px;
+            color: white
+        }
+
+        .game-panel {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            color: white;
+
+            border: 2px solid white;
+            /* Рамка для отображения границ элементов */
+        }
+
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            width: 800px;
+            border-radius: 10px;
+            margin: 50px auto;
+            background-image: url("images/wall.jpg");
+            background-size: 100%;
+            background-position-y: -255px;
+            box-shadow: 0 0 50px 30px rgba(0, 0, 0, 0.5); 
+            cursor: url("images/aim.svg"), pointer;
+        }
+
+        .item {
+            box-sizing: border-box;
+            /* Учитывать padding и border в расчетах ширины */
+           
+            width: 120px;
+            height: 120px;
+            margin: 10px 20px; 
+            border-radius: 50%;
+            border: 2px solid white;
+            /* Рамка для отображения границ элементов */
+        }
+
+        img {
+            width: 100%;
+            height: 100%;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="game-panel">
+        <button id="sound-btn">SOUND ON</button>
+        <div>
+            <div class="counter">HITS:
+                <span id="hit-counter">0</span>
+            </div>
+            <div class="counter">MISS:
+                <span id="miss-counter">0</span>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+    </div>
+    <!-- <audio id="shot" src="shot.mp3"></audio>
+    <button id="bu-btn">Sound</button>
+    <audio id="bu" src="bu.mp3" loop></audio>
+    <div class="container">
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="hit-counter">0</div>
+        <div class="miss-counter">0</div>
+    </div>
+    <script>
+
+        let items = document.querySelectorAll(".item");
+        let hitCounter = document.querySelector(".hit-counter");
+        let missCounter = document.querySelector(".miss-counter");
+        let shot = document.querySelector("#shot");
+        let bu = document.querySelector("#bu");
+        let buBtn = document.querySelector("#bu-btn");
+        let index;
+        let hit = true;
+
+        function getRandomItemIndex(array) {
+            return Math.floor(Math.random() * array.length);
+        };
+
+        let image = document.createElement("img");
+        image.src = "zombie.png";
+        let hitImage = document.createElement("img");
+        hitImage.src = "blood-removebg.png";
+        index = getRandomItemIndex(items);
+        items[index].append(image);
+
+        setInterval(function () {
+            if (hit === false) {
+                missCounter.innerText++;
+            } else {
+                hit = false;
+            }
+            index = getRandomItemIndex(items);
+            items[index].append(image);
+            hitImage.remove();
+        }, 2000)
+
+        image.onclick = function (e) {
+            hit = true;
+            hitCounter.innerText++;
+            shot.currentTime = 0;
+            shot.play();
+            image.remove();
+            items[index].append(hitImage);
+        }
+        buBtn.onclick = function () {
+            if (bu.currentTime) {
+                bu.pause();
+                bu.currentTime = 0;
+            } else {
+                bu.play();
+            }
+        }
+        let div = document.createElement("div");
+        let btn = document.createElement("button");
+        div.append(btn);
+        document.body.append(div)
+        cDM();
+    </script> -->
+</body>
+
+</html>
