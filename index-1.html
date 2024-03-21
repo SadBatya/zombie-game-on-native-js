@@ -65,7 +65,10 @@
 
   <body>
     <div class="game-panel">
-      <button id="sound-btn">SOUND ON</button>
+      <div>
+        <button id="sound-btn">SOUND ON</button>
+        <button id="start-button">START</button>
+      </div>
       <div>
         <div class="counter">
           HITS:
@@ -107,6 +110,10 @@
 
     <script>
       let randomIndex;
+
+      const startBtn = document.querySelector('#start-button');
+      let isStarted = false;
+
       const zombieImg = document.createElement('img');
       zombieImg.src = './images/zombie.png';
 
@@ -116,23 +123,16 @@
 
       const hitImg = document.createElement('img');
       hitImg.src = './images/blood.png';
-      
+
+      let interval; //переменная для запуска и остановки интервала
       let hit = true;
-      const hitCounter = document.querySelector('#hit-counter');
+      let hitCounter = document.querySelector('#hit-counter');
       const shot = document.querySelector('#sound-shot');
 
       //создаем счетчик для подсчета промахов
-      const missCounter = document.querySelector('#miss-counter');
+      let missCounter = document.querySelector('#miss-counter');
 
       // при клике на зомби заменяем картинку на другую иконку
-      zombieImg.onclick = function () {
-        hit = true;
-        hitCounter.innerText++;
-        bu.currentTime = 0;
-        shot.play();
-        zombieImg.remove();
-        items[randomIndex].append(hitImg);
-      };
 
       //добавляем включение и выключение фоновой музыки
       soundBtn.onclick = function () {
@@ -152,20 +152,48 @@
       }
 
       randomIndex = getRandomItemIndex(items);
-      items[randomIndex].append(zombieImg);
 
-      // задаем интервал появления зомби
-      setInterval(function () {
-        if (hit === true) {
-          hit = false;
+      // задаем процесса
+      function playGame() {
+        interval = setInterval(function () {
+          if (hit === true) {
+            hit = false;
+          } else {
+            missCounter.innerText++;
+          }
+          hitImg.remove();
+          randomIndex = getRandomItemIndex(items);
+          items[randomIndex].append(zombieImg);
+        }, 2000);
+      }
+
+      // функция запуска и остановки игры
+      startBtn.onclick = function () {
+        if (isStarted) {
+          isStarted = false;
+          zombieImg.onclick = null;
+          zombieImg.remove();
+          hitImg.remove();
+          console.log('counter')
+          missCounter.innerText = 0;
+          hitCounter.innerText = 0;
+          clearInterval(interval);
+          startBtn.innerText = 'START';
         } else {
-          missCounter.innerText++;
+          isStarted = true;
+          zombieImg.onclick = function () {
+            hit = true;
+            hitCounter.innerText++;
+            bu.currentTime = 0;
+            shot.play();
+            zombieImg.remove();
+            items[randomIndex].append(hitImg);
+          };
+          items[randomIndex].append(zombieImg);
+          playGame();
+          startBtn.innerText = 'STOP';
         }
-        hitImg.remove();
-        randomIndex = getRandomItemIndex(items);
-        items[randomIndex].append(zombieImg);
-      }, 2000);
-
+      };
     </script>
   </body>
 </html>
