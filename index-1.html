@@ -174,7 +174,7 @@
           zombieImg.onclick = null;
           zombieImg.remove();
           hitImg.remove();
-          console.log('counter')
+          console.log('counter');
           missCounter.innerText = 0;
           hitCounter.innerText = 0;
           clearInterval(interval);
@@ -184,7 +184,6 @@
           zombieImg.onclick = function () {
             hit = true;
             hitCounter.innerText++;
-            bu.currentTime = 0;
             shot.play();
             zombieImg.remove();
             items[randomIndex].append(hitImg);
